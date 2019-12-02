@@ -11,24 +11,23 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="8">
-        <ion-item>
-          <ion-label position="stacked">Cod de Barra:</ion-label>
-          <ion-input type="text" [(value)]="data.barcode" (keyup)="onKeyUpBarCode()"></ion-input>
-        </ion-item>
-      </ion-col>
-      <ion-col size="2">
-        <ion-button>
-            <ion-icon name="camera"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col size="2">
-        <ion-button color="success">
-          <ion-icon name="barcode"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-card (click)="gotoZebra()">
+      <div class="logo logo-zebra"></div>
+    <ion-card-header>
+      <ion-card-title>Zebra</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Pulse aquí en caso de que el dispositivo actual corresponda a una Etiquetadora Zebra.</p>
+    </ion-card-content>
+  </ion-card>
+  
+  <ion-card (click)="gotoSmartphone()">
+    <div class="logo logo-android"></div>
+    <ion-card-header>
+      <ion-card-title>Android</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Pulse aquí en caso de que el dispositivo actual corresponda a un smartphone.</p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

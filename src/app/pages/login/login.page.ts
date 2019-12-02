@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavController } from '@ionic/angular';
 import { Cookie } from '../../tool/cookie';
 
 @Component({
@@ -12,12 +12,14 @@ export class LoginPage implements OnInit {
   data = {
     nick: '',
     pass: '',
-    disabled: true
+    disabled: true,
+    loading: false
   };
 
   constructor(
     private usersServ: UserService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    private navCtrl: NavController
   ) { }
 
   ngOnInit() {
@@ -39,16 +41,13 @@ export class LoginPage implements OnInit {
 
   async btnLoginClick() {
     try {
+      this.data.loading = true;
       const res = await this.usersServ.login(
         this.data.nick,
         this.data.pass
       );
 
       if (res == null) {
-        // RESET
-        this.data.nick = '';
-        this.data.pass = '';
-
         // Instanciar la tostada
         const toast = await this.toastCtrl.create({
           header: 'ERROR',
@@ -70,9 +69,10 @@ export class LoginPage implements OnInit {
       } else {
         // Redirigir al Home
         const galleta = new Cookie('userData', res, 30);
-        location.href = '/home';
+        // location.href = '/home';
+        this.navCtrl.navigateForward('home');
       }
-    } catch(fail) {
+    } catch (fail) {
       // Instanciar la tostada
       const toast = await this.toastCtrl.create({
         header: 'ERROR',
@@ -88,6 +88,12 @@ export class LoginPage implements OnInit {
 
       // Mostrar la Tostada esa
       toast.present();
+    } finally {
+      // RESET
+      this.data.nick = '';
+      this.data.pass = '';
+
+      this.data.loading = false;
     }
   }
 }

@@ -11,6 +11,14 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
   },
+  {
+    path: 'zebra',
+    loadChildren: () => import('./pages/zebra/zebra.module').then( m => m.ZebraPageModule)
+  },
+  {
+    path: 'smartphone',
+    loadChildren: () => import('./pages/smartphone/smartphone.module').then( m => m.SmartphonePageModule)
+  },
 ];
 
 @NgModule({

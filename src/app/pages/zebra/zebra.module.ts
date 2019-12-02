@@ -3,18 +3,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
-import { HomePageRoutingModule } from './home-routing.module';
-
-import { HomePage } from './home.page';
+import { ZebraPageRoutingModule } from './zebra-routing.module';
+import { ZebraPage } from './zebra.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    ZebraPageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [ZebraPage]
 })
-export class HomePageModule {}
+export class ZebraPageModule {
+}

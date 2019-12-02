@@ -2,24 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { serverUrl, headers } from '../global';
-import { Usuario } from '../interfaces/usuario';
+import { Etiqueta } from '../interfaces/etiqueta';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class EtiquetaService {
   constructor(private http: HttpClient) { }
 
-  login(nick: string, pass: string) {
-    return this.http.post<Usuario>(
-      serverUrl + 'user/login',
-      JSON.stringify({
-        nick,
-        pass
-      }),
+  getByCodBarra(codBarra: string) {
+    return this.http.get<Etiqueta>(
+      serverUrl + 'etiq/print/' + codBarra,
       {
         headers: headers()
       }
-    ).toPromise<Usuario>();
+    ).toPromise<Etiqueta>();
   }
 }

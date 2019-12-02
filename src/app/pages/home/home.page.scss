@@ -1,0 +1,33 @@
+ion-card {
+    .logo {
+        display: flex;
+    }
+    
+    @media (orientation: portrait) {
+        .logo {
+            height: calc(50vh - 10rem);
+        }
+    }
+    
+    @media (orientation: landscape) {
+        .logo {
+            height: calc(50vh - 8.5rem);
+        }
+    }
+
+    .logo-zebra {
+        background-color: #f2ff38;
+        background-image: url("/assets/img/logo-zebra.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .logo-android {
+        background-color: #ececec;
+        background-image: url("/assets/img/logo-android.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}
