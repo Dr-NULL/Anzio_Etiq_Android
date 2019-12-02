@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="login"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="barcode"></ion-icon>
+      <span>Escáner de Etiquetas</span>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="8">
+        <ion-item>
+          <ion-label position="stacked">Cod de Barra:</ion-label>
+          <ion-input type="text" [(value)]="data.barcode" (keyup)="onKeyUpBarCode()"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button>
+            <ion-icon name="camera"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="2">
+        <ion-button color="success">
+          <ion-icon name="barcode"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

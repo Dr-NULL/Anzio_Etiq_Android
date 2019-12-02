@@ -1,0 +1,32 @@
+<ion-content>
+  <div class="login-logo">
+    <img src="assets/img/logo-hor.png" />
+  </div>
+
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Usuario:</ion-label>
+          <ion-input [(ngModel)]="data.nick" (keyup)="txtKeyUp()" type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">Contraseña:</ion-label>
+          <ion-input [(ngModel)]="data.pass" (keyup)="txtKeyUp()" type="password"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12">
+        <ion-button expand="block" (click)="btnLoginClick()" disabled="{{ data.disabled }}">
+          <ion-icon name="exit"></ion-icon>
+          <span>Login</span>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
