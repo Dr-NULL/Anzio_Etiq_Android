@@ -8,7 +8,7 @@
       <ion-col size="12">
         <ion-item>
           <ion-label position="floating">Usuario:</ion-label>
-          <ion-input [(ngModel)]="data.nick" (keyup)="txtKeyUp()" type="text"></ion-input>
+          <ion-input [(ngModel)]="data.nick" (keyup)="txtKeyUp($event)" type="text"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -16,7 +16,7 @@
       <ion-col size="12">
         <ion-item>
           <ion-label position="floating">Contraseña:</ion-label>
-          <ion-input [(ngModel)]="data.pass" (keyup)="txtKeyUp()" type="password"></ion-input>
+          <ion-input [(ngModel)]="data.pass" (keyup)="txtKeyUp($event)" type="password"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>

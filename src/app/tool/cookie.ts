@@ -16,7 +16,7 @@ export class Cookie {
             expire.setTime(expire.getTime() + (1000 * 60 * min));
 
             make += 'expires=' + expire.toUTCString() + '; ';
-            make += 'path=/;';
+            make += 'path=/; HttpOnly; Secure; SameSite=Strict';
         }
         document.cookie = make.trim();
     }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { serverUrl, headers } from '../global';
 import { Etiqueta } from '../interfaces/etiqueta';
 
 @Injectable({
@@ -12,10 +11,7 @@ export class EtiquetaService {
 
   getByCodBarra(codBarra: string) {
     return this.http.get<Etiqueta>(
-      serverUrl + 'etiq/print/' + codBarra,
-      {
-        headers: headers()
-      }
+      'http://192.168.20.218/etiq/print/' + codBarra
     ).toPromise<Etiqueta>();
   }
 }

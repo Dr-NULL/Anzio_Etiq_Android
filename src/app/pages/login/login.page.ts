@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { ToastController, NavController } from '@ionic/angular';
 import { Cookie } from '../../tool/cookie';
@@ -8,7 +8,7 @@ import { Cookie } from '../../tool/cookie';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   data = {
     nick: '',
     pass: '',
@@ -20,12 +20,16 @@ export class LoginPage implements OnInit {
     private usersServ: UserService,
     private toastCtrl: ToastController,
     private navCtrl: NavController
-  ) { }
+  ) {}
 
-  ngOnInit() {
+  async ionViewWillEnter() {
+    // Matar Sesión
+    console.log('-> Test');
+    await this.usersServ.logout();
+    Cookie.kill('ayyy');
   }
 
-  txtKeyUp() {
+  txtKeyUp(ev: KeyboardEvent) {
     if (this.data.nick.length < 5) {
       this.data.disabled = true;
       return;
@@ -37,6 +41,10 @@ export class LoginPage implements OnInit {
     }
 
     this.data.disabled = false;
+
+    if (ev.key.toLowerCase() === 'enter') {
+      this.btnLoginClick();
+    }
   }
 
   async btnLoginClick() {
@@ -67,9 +75,13 @@ export class LoginPage implements OnInit {
           toast.dismiss();
         }, 2500);
       } else {
+        // Matar Sesión
+        setTimeout(() => {
+          location.href = 'login';
+        }, 30 * 60 * 1000);
+
         // Redirigir al Home
-        const galleta = new Cookie('userData', res, 30);
-        // location.href = '/home';
+        const galleta = new Cookie('data', res, 30);
         this.navCtrl.navigateForward('home');
       }
     } catch (fail) {
@@ -94,6 +106,7 @@ export class LoginPage implements OnInit {
       this.data.pass = '';
 
       this.data.loading = false;
+      this.data.disabled = true;
     }
   }
 }

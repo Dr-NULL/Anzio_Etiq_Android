@@ -1,9 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>smartphone</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      <ion-icon name="barcode"></ion-icon>
+      <span>Smartphone Scanner</span>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-button class="btn-scan" color="success" (click)="scanNow()">
+    <ion-icon name="barcode"></ion-icon>
+    <span>Escanear</span>
+  </ion-button>
 
+  <app-card-etiqueta>
+  </app-card-etiqueta>
 </ion-content>

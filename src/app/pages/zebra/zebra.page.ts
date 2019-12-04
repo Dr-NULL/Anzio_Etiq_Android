@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonInput } from '@ionic/angular';
 
-import { EtiquetaService } from '../../services/etiqueta.service';
-import { Etiqueta } from '../../interfaces/etiqueta';
+import { CardEtiquetaComponent } from '../../shared/card-etiqueta/card-etiqueta.component';
 
 @Component({
   selector: 'app-zebra',
@@ -11,35 +10,12 @@ import { Etiqueta } from '../../interfaces/etiqueta';
 })
 export class ZebraPage implements OnInit {
   @ViewChild('search', { static: false }) search: IonInput;
-  public txtSearch = '';
-  public txtTitle = 'Esperando búsqueda...';
-  public data: Etiqueta = {
-    id: null,
-    producto: {
-      id: null,
-      codigo: '',
-      descripc: {
-        chinese: '',
-        english: '',
-        spanish: ''
-      }
-    },
-    codBarra: '',
-    contrato: '',
-    familia: '',
-    fecha: {
-      faena: null,
-      produc: null,
-      vencim: null
-    },
-    peso: {
-      bruto: null,
-      neto: null
-    },
-    loteCertif: ''
-  };
+  @ViewChild(CardEtiquetaComponent, { static: false }) etiqueta: CardEtiquetaComponent;
 
-  constructor(public etiquServ: EtiquetaService) {}
+  public txtSearch = '';
+
+  constructor() {}
+
   ngOnInit() {
     setTimeout(() => {
       this.search.setFocus();
@@ -48,47 +24,18 @@ export class ZebraPage implements OnInit {
 
   async onSearchKeyUp(event: KeyboardEvent) {
     if (event.key === 'Enter') {
-      // Triggerear búsqueda
+      this.txtSearch = this.txtSearch.trim();
       await new Promise(resolve => {
-        setTimeout(() => { resolve(); }, 500);
+        setTimeout(() => {
+          resolve();
+        }, 250);
       });
 
-      // Consultar
-      const res = await this.etiquServ.getByCodBarra(this.txtSearch.trim());
-      if (res != null) {
-        this.txtTitle = 'Cod: ' + res.codBarra;
-        this.data = res;
-
-      } else {
-        this.txtTitle = 'No encontrado...';
-        this.data = {
-          id: null,
-          producto: {
-            id: null,
-            codigo: '',
-            descripc: {
-              chinese: '',
-              english: '',
-              spanish: ''
-            }
-          },
-          loteCertif: '',
-          codBarra: '',
-          contrato: '',
-          familia: '',
-          fecha: {
-            faena: null,
-            produc: null,
-            vencim: null
-          },
-          peso: {
-            bruto: null,
-            neto: null
-          }
-        };
-      }
-
-      this.txtSearch = '';
+      await this.etiqueta.ngSearch(this.txtSearch);
+      setTimeout(() => {
+        this.search.setFocus();
+        this.txtSearch = '';
+      }, 500);
     }
   }
 }
